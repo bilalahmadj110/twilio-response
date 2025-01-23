@@ -5,13 +5,33 @@ from utils.message_handler import MessageHandler
 from utils.webhook_auth import validate_twilio_request
 from config import Config
 import logging
+from logging.handlers import RotatingFileHandler
+import os
+
+# Create logs directory if it doesn't exist
+if not os.path.exists('logs'):
+    os.makedirs('logs')
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
+# Create handlers
+console_handler = logging.StreamHandler()
+file_handler = RotatingFileHandler(
+    'logs/app.log', 
+    maxBytes=10000000,  # 10MB
+    backupCount=5
+)
+
+# Create formatters and add it to handlers
+log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(log_format)
+file_handler.setFormatter(log_format)
+
+# Add handlers to the logger
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
 
 app = Flask(__name__)
 app.config.from_object(Config)
