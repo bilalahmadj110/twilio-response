@@ -52,7 +52,7 @@ def webhook():
         logger.error(f"Error processing webhook: {e}")
         return str(MessagingResponse())
 
-@app.route("/health", methods=['GET'])
+@app.route("/", methods=['GET'])
 def health_check():
     """Health check endpoint."""
     return {"status": "healthy", "redis": redis_client.is_connected()}
