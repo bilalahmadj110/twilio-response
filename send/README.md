@@ -127,11 +127,7 @@ Common issues:
 - Connection issues: Check internet connectivity
 - Authentication errors: Verify Twilio credentials
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ---
 
 Created by: Bilal Ahmad  
-Last Updated: October 2023
+Last Updated: Jan 2025
